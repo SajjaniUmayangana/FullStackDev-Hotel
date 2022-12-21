@@ -1,8 +1,8 @@
 const express = require('express');
+const { register, login } = require('../controller/authController');
 const route = express.Router();
 
-route.get('/',(req, res) =>{
-   res.send("Hello, this is AUTH endpoint");
-})
+route.post('/register', register)
+route.post('/login', login)
 
-module.exports = route; 
+module.exports = route;    
