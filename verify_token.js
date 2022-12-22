@@ -25,7 +25,7 @@ exports.verifyToken = (req, res, next) => {
 // verify the user (the user of the admin can delelte the account)
 exports.verifyUser = (req, res, next) => {
 
-   this.verifyToken(req,res, ()=> {
+   this.verifyToken(req,res, next, ()=> {
     if (req.user.id == req.params.id || req.user.isAdmin){
         next()
     }else{
@@ -34,3 +34,16 @@ exports.verifyUser = (req, res, next) => {
 
    })
 }
+
+// verify admin
+exports.verifyAdmin = (req, res, next) => {
+
+    this.verifyToken(req,res, next, ()=> {
+     if (req.user.isAdmin){
+         next()
+     }else{
+         return next(errorCreated.errorCreated(403,"You are not authorized"))
+     }
+ 
+    })
+ }
