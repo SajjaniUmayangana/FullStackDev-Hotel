@@ -1,0 +1,51 @@
+<!-- include header -->
+<%- include('header') %>
+
+<!-- include navbar -->
+<%- include('navbar') %>
+
+<!-- Section: Design Block -->
+<section class="registerSection">
+   
+      <div class="logincontainer" >
+        <div class="row gx-lg-5">
+          <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="card logincard">
+              <div class="card-body py-5 px-md-4">
+
+                <div id ="errorMessage"></div>
+
+                <!-- Register Form-->
+                <form action="/auth/login" method="POST" id="form login_form">
+                  <div class="row">
+                
+                      <div class="form-outline mb-5">
+                        <label class="form-label" for="form3Example1">Username</label>
+                        <input type="text" id="form3Example1" class="form-control" name="username" id="username" required/>
+                      </div>
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-5">
+                    <label class="form-label" for="form3Example4">Password</label>
+                    <input type="password" id="form3Example4" class="form-control" name="password" id="password"/>
+                  </div>
+  
+                  <div class=" d-grid justify-content-md-center">
+                     <!-- Submit button -->
+                     <button type="submit" class="btn btn-primary btn-block mb-4 loginbtn">
+                      Login
+                      </button>
+                  </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+
+  <!-- include footer -->
+  <%- include('footer') %>

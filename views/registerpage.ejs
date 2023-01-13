@@ -1,0 +1,70 @@
+<!-- include header -->
+<%- include('header') %>
+
+<!-- include navbar -->
+<%- include('navbar') %>
+
+<section class="registerSection">
+  
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Register Now And <br />
+              <span class="text-primary">Book Your Stay</span>
+            </h1>
+            <p style="color: rgba(117, 127, 142, 0.62)">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+              quibusdam tempora at cupiditate quis eum maiores libero
+              veritatis? Dicta facilis sint aliquid ipsum atque?
+            </p>
+          </div>
+  
+          <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-4">
+
+                <!-- Register Form-->
+                <form action="/auth/register" method="POST" id="register_form">
+                  <div class="row">
+                
+                      <div class="form-outline mb-5">
+                        <label class="form-label" for="form3Example1">Username</label>
+                        <input type="text" id="form3Example1" class="form-control" name="username" id="username" />
+                      </div>
+                  </div>
+  
+                  <!-- Email input -->
+                  <div class="form-outline mb-5">
+                    <label class="form-label" for="form3Example3">Email address</label>
+                    <input type="email" id="form3Example3" class="form-control" name="email" id="email"/>
+                   
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-5">
+                    <label class="form-label" for="form3Example4">Password</label>
+                    <input type="password" id="form3Example4" class="form-control" name="password" id="password"/>
+                  </div>
+  
+                  <div class=" d-grid justify-content-md-center">
+                     <!-- Submit button -->
+                     <button type="submit" class="btn btn-primary btn-block mb-4 registerbtn">
+                      Sign up
+                      </button>
+                  </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- include footer -->
+  <%- include('footer') %>
