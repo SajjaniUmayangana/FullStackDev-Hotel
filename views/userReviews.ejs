@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/review.css">
+    <link rel="stylesheet" href="css/reviewStyle.css">
+   
+
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+</head>
+<body>  
+    <section class="container-fluid chat-section">
+    <nav class="navbar  navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/" id="logoTitle"><b> Bondel Hotel</b></a>
+      
+          <!-- Toggler Bar -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link navtext" aria-current="page" href="/">Home</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link navtext" href="#">About</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link navtext" href="#">Review</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link navtext" href="#">Rooms</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link navtext" href="/chat">Chat with us</a>
+              </li>
+            </ul>
+      
+            <div class="d-grid d-md-flex justify-content-md-end">
+              <a href="./registerpage" class="btn me-md-3 navtextbtn" role="button">Sign Up </a>
+              <a href="./loginpage" class="btn me-md-3 navtextbtn" role="button">Login </a>
+            </div>
+      
+          </div>
+        </div>
+      </nav>
+      <!------------ Nav Bar Section End---------->
+      
+        <div class="reviewHeader text-center">
+            <h1>Customer Reviews</h1>
+        </div>
+
+        <!-- where messages are displayed -->
+        <div class="message_area" id="messages"> 
+            <div class="message">
+                <!-- messages will be displayed -->
+            </div>
+        </div>
+
+          <div>
+               <!-- Form to send message  -->
+              <form id="msgForm" action="">
+                 <input type="text" name="msg" class="textarea" placeholder="Type your review here ...">
+                 <button class="sendBtn">SEND</button>
+              </form>
+        </div>
+       
+    </section>
+<!-- 
+    <!-- Model to get username  -->
+    <div class="popup">
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Input a Nick Name </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label class="form-label" for="form3Example4cg">Enter a name or a nick </label>
+                <input type="text" id="" class="form-control form-control-lg" name="" id="" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+
+  <script src="/socket.io/socket.io.js"> </script>
+
+    <script> 
+     
+
+     // variables accessing the message area and the form to send message by using ID
+     const messages = document.getElementById('messages');
+     const msgForm = document.getElementById('msgForm');
+ 
+
+    const socket = io('http://localhost:8800')
+
+  
+
+    // Reiving message
+    socket.on('message', data =>{
+        console.log(data)
+        appendMessages(data)
+    })
+
+    socket.on('output-message', data =>{
+        console.log(data)
+        if(data.length){
+            data.forEach(message =>{
+                appendMessages(message.msg)
+            })
+        }
+    })
+
+
+    function appendMessages(message){
+
+        const html = `
+     <section ">
+        <div class="container  pt-3 text-dark">
+           <div class="row d-flex justify-content-center">
+             <div class="col-xl-9">
+
+               <div class="card mb-2">
+                 <div class="card-body">
+                    <div class="d-flex flex-start">
+                      <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp" alt="avatar" width="40" height="40" />
+
+                   <div class="w-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                         
+                              <p class="mb-0">2 days ago</p>
+                        </div>
+                
+                      <div class="d-flex justify-content-between align-items-center">
+                          <span class="text-dark ms-2">${message}</span>
+                      
+                      <div class="d-flex flex-row">
+                          <i class="fas fa-star text-warning me-2"></i>
+                          <i class="far fa-check-circle" style="color: #aaa;"></i>
+                      </div>
+                 </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+        `;
+        messages.innerHTML += html;
+    }
+
+
+    msgForm.addEventListener('submit', e => {
+        e.preventDefault();
+        socket.emit('chatmessage', msgForm.msg.value);
+        msgForm.msg.value = '';
+     })
+    
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+   
+</body>
+</html>

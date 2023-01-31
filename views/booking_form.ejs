@@ -15,30 +15,37 @@
               </p>
             </div>
           </div>
+
           <div class="col-md-4 col-md-pull-7">
-            <div class="booking-form">
-              <form action="" method="POST" >
+            <div class="booking-form ">
+              <div class="text-center" style=" padding-bottom: 10px;"> 
+                <h1 style=" font-size: 30px; text-transform: uppercase; font-weight: 700;">Check Your Availability</h1>
+              </div>
+
+              <form action="/displayRooms" method="GET" style=" padding-top: 20px;" >
                 <!-- <div class="form-group">
                                         <span class="form-label">Your Destination</span>
                                         <input class="form-control" type="text" placeholder="Enter a destination or hotel name">
                                     </div>
                                 -->
+                                  
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <span class="form-label">Check In</span>
-                      <input class="form-control" type="date" name="checkInDate" required />
+                     <span class="form-label">Check In</span>
+                      <input class="form-control" type="date" name="checkIn" id="checkin" required />
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <span class="form-label">Check out</span>
-                      <input class="form-control" type="date" name="checkOutDate" required />
+                      <input class="form-control" type="date" name="checkOut" id="checkout" required />
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-4">
+
+                 <div class="row">
+                  <div class="col-sm-6">
                     <div class="form-group">
                       <span class="form-label">Rooms</span>
                       <select class="form-control">
@@ -49,7 +56,20 @@
                       <span class="select-arrow"></span>
                     </div>
                   </div>
-                  <div class="col-sm-4">
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <span class="form-label">Guest</span>
+                      <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                      </select>
+                      <span class="select-arrow"></span>
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-sm-4">
                     <div class="form-group">
                       <span class="form-label">Adults</span>
                       <select class="form-control">
@@ -59,8 +79,8 @@
                       </select>
                       <span class="select-arrow"></span>
                     </div>
-                  </div>
-                  <div class="col-sm-4">
+                  </div> -->
+                  <!-- <div class="col-sm-4">
                     <div class="form-group">
                       <span class="form-label">Children</span>
                       <select class="form-control">
@@ -73,10 +93,11 @@
                       </select>
                       <span class="select-arrow"></span>
                     </div>
-                  </div>
-                </div>
+                  </div> -->
+                </div> 
                 <div class="form-btn">
-                  <button class="submit-btn">Check availability</button>
+                 <button class="submit-btn">Find Now</button>
+              
                 </div>
               </form>
             </div>
@@ -85,3 +106,5 @@
       </div>
     </div>
   </div>
+
+  

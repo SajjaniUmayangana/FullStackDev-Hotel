@@ -1,0 +1,216 @@
+
+<!-- Admin home -->
+<%- include('adminHome') %>
+<!--- /Admin home -->
+
+  
+  <!--Main layout-->
+  <main style="margin-top: 58px;">
+    <div class="container pt-4">
+
+         <!-- Message box  -->
+    <% if(message.length > 0) { %>
+      <div id="alertmessage" class="alert alert-warning mt-3" role="alert">
+          <%= message %>
+      </div>
+    <% } %>
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-success" id="get-btn">GET</button>
+          
+         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="adimnCreateUserBtn">NEW USER</button>
+
+          <!-- <button class="btn btn-primary" id="addnewuser-btn">NEW USER</button> -->
+          <!-- <button class="btn btn-warning" id="put-btn">PUT</button>
+          <button class="btn btn-danger" id="delete-btn">DELETE</button> -->
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Table section -->
+    <div class="container mt-3">
+      <div class="row tableGetSection">
+        <div class="col">
+          <table class="table text-center table-striped">
+            <thead class="bg-secondary text-white" style="font-size: 12px">
+              <tr>
+                <th>USER ID</th>
+                <th>USERNAME</th>
+                <th>EMAIL</th>
+                <th>PASSWORD</th>
+                <th>ISADMIN</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+
+            <tbody id="table-body" style="font-size: 12px">
+              <!-- <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+<!-- New User Form -->
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" id="addusermodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <!-- Form -->
+            <div class="card-body p-2">
+                <h2 class="text-uppercase text-center mb-5">CREATE A NEW USER</h2>
+
+                         <!-- Message box  -->
+    <% if(message.length > 0) { %>
+      <div id="alertmessage" class="alert alert-warning mt-3" role="alert">
+          <%= message %>
+      </div>
+    <% } %>
+  
+                <form action="/auth/registerUserByAdmin" method="POST" id="add-user-form">
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Username</label>
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" name="username" id="username" />
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg">Email</label>
+                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email" id="email" />
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example4cg">Password</label>
+                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" name="password" id="password" />
+                  </div>
+
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="form3Example4cg">Admin</label>
+                </div> 
+                    <div class="form-check form-check-inline mb-0 me-4">
+                        <input class="form-check-input" type="radio" name="isAdmin" 
+                          value="true"  id="isAdmin"/>
+                        <label class="form-check-label" for="" >Yes</label>
+                      </div>
+    
+                      <div class="form-check form-check-inline mb-0 me-4">
+                        <input class="form-check-input" type="radio" name="isAdmin" id="isAdmin"
+                          value="false" />
+                        <label class="form-check-label" for="">No</label>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Submit</button>
+                  </div>
+                </form>
+  
+              </div>
+            <!-- Form End -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Update User Form -->
+   <div class="modal fade" id="updateform" id="updateuser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <!-- Update Form -->
+            <div class="card-body p-2">
+                <h2 class="text-uppercase text-center mb-5">UPDATE USER </h2>
+  
+                <form id="updateUserForm">
+
+                  <!-- <input hidden type="text" id="updateUserId" class="form-control form-control-lg" name="userID" id="userId" /> -->
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Username</label>
+                    <input type="hidden" name="id"  id= "updateID" />
+                    <input type="text" id="updateUsername" class="form-control form-control-lg" name="username" id="username" />
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg">Email</label>
+                    <input type="email" id="updateEmail" class="form-control form-control-lg" name="email" id="email" />
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example4cg">Password</label>
+                    <input type="password" id="updatePassword" class="form-control form-control-lg" name="password" id="password" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg">Is Admin? (true / false)</label>
+                    <input type="text" id="updateisAdmin" class="form-control form-control-lg" name="isAdmin" id="isAdmin" />
+                  </div>
+<!-- 
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="form3Example4cg">Admin</label>
+                </div>  -->
+
+                   <!-- <div class="form-check form-check-inline mb-0 me-4">
+                        <select id="isAdmin">
+                            <option value="true"> Yes Admin </option>
+                            <option value="false"> No Admin</option>
+                        </select>
+                     </div>  -->
+    
+
+                    <!-- <div class="form-check form-check-inline mb-0 me-4">
+                        <input class="form-check-input" type="radio" name="isAdmin"  value="true"  id="updateisAdmin"/>
+                        <label class="form-check-label" for="" >YES</label>
+                      </div>
+    
+                      <div class="form-check form-check-inline mb-0 me-4">
+                        <input class="form-check-input" type="radio" name="isAdmin"  value="false"  id="updateisAdmin"/>
+                        <label class="form-check-label" for="" >NO</label>
+                      </div> -->
+
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Submit</button>
+                  </div>
+
+
+                </form>
+            </div>
+            <!-- Form End  -->
+        </div>
+      </div>
+    </div>
+  </div> 
+
+</div>
+</main>
+<!--Main layout-->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
+
+
