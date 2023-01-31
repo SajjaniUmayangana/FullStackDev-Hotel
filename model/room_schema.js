@@ -2,23 +2,49 @@ const mongoose = require("mongoose");
 
 const roomSchema = new mongoose.Schema(
   {
-    roomtitle: {
-      type: String,
+    roomNumber: {
+      type: Number,
+      unique: true,
       required: true,
     },
+    roomType: {
+        type: String,
+        required: true,
+      },
     description: {
       type: String,
-      required: true,
-    },
-    maxPeople: {
-      type: Number,
-      required: true,
+      // required: true,
     },
     price: {
-      type: Number,
-      required: true,
+      type: String,
     },
-    roomNumbers: [{ number: Number, datesBooked: [{ type: [Date] }] }], // datesBooked is their so that if a room is reserved it will be reserved on that date
+    img:{
+      type: String,
+    }, 
+    noOfpeople:{
+      type: Number,
+    },
+    checkIn:{
+      type: Date,
+    },
+    checkOut:{
+      type: Date,
+    }
+    
+    //img: []
+    // currentbookings:[],
+    // availability:{
+    //   type: Boolean
+    // },
+    // startDate:{
+    //     type: Date,
+    //     required: true,
+    // },
+    // endDate:{
+    //     type: Date,
+    //     required: true,
+    // }
+         // roomNumbers: [{ number: Number, datesBooked: [{ type: [Date] }] }], // datesBooked is their so that if a room is reserved it will be reserved on that date
   },
   { timestamps: true }
 );
