@@ -22,16 +22,20 @@ const { verifyToken, verifyUser, verifyAdmin } = require('../verify_token');
 
 
 // Update
-route.put("/update/:id", verifyUser, userController.updateUser);
+route.put("/update/:id", userController.updateUser);
+// route.put("/update/:id", verifyUser, userController.updateUser);
 
 // Delete
-route.delete("/delete/:id", verifyUser, userController.deleteUser);
+route.delete("/delete/:id", userController.deleteUser);
+// route.delete("/delete/:id", verifyUser, userController.deleteUser);
 
 // Get
-route.get("/retrive/:id", verifyUser, userController.getUser);
+route.get("/retrive/:id",userController.getUser);
+// route.get("/retrive/:id", verifyUser, userController.getUser);
 
 // Get All
-route.get("/retrive", verifyAdmin, userController.getUsers);
+route.get("/retrive", userController.getUsers);
+// route.get("/retrive", verifyAdmin, userController.getUsers);
 
 
 module.exports = route; 
