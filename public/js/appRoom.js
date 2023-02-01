@@ -28,6 +28,7 @@ let displayRoom = (roomdata) => {
             <td width="25%">${room.description}</td>
             <td width="8%">${room.price}</td>
             <td width="8%">${room.noOfpeople}</td>
+            <td width="8%">${room.availability}</td>
             <td width="10%"><img src="./img/${room.img}" width="200" height="150" alt="room images"></td>
             <td width="10%">
             <button class="btn btn-primary update" id="update-btn">U</button>
@@ -103,6 +104,7 @@ let populateRoomModel = (selectRoom) =>{
     document.querySelector('#updateDescription').value = selectRoom.description;
     document.querySelector('#updatePrice').value = selectRoom.price;
     document.querySelector('#updatePeople').value = selectRoom.noOfpeople;
+    
    
     $('#updateform').modal('show');
     

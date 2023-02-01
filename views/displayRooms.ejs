@@ -27,6 +27,15 @@
         <h3> Rooms available </h3>
       </div>
 
+
+                               <!-- Message box  -->
+    <% if(message.length > 0) { %>
+      <div id="alertmessage" class="alert alert-warning mt-3" role="alert">
+          <%= message %>
+      </div>
+    <% } %>
+
+
       <!-- <button class="btn btn-success" id="get-btn">GET</button> -->
 
       <div class="container pt-2 pb-3 text-center" id="cardDisplayRoom" >
@@ -68,6 +77,7 @@
             let data = xhr.responseText;
             let roomdata = JSON.parse(data);
             displayRoomlist (roomdata);
+            localStorage.setItem('roomID', roomdata._id)
         }
     }
 })
@@ -97,8 +107,11 @@
                 <div class="d-flex flex-row mb-3">
                 <h6> ${room.price}</h6>
                 </div>
+
+                <form action="room/bookroom/${room._id}" method="POST">
+                  <button type="submit" class="btn btn-primary data-bs-dismiss="modal">Book Now</button>
+                </form>
                 
-                 <a href="room/getroombyid/${room._id}" class="btn booknowbtn btn-primary">Book Now</a>
               </div>
 
               <div class="col-6 text-center ">
@@ -111,6 +124,15 @@
        document.querySelector('#cardDisplayRoom').innerHTML = eachCard;
    }
 
+
+   // To close the message box after few seconds 
+let alertmessage =  document.getElementById("alertmessage")
+   
+   $(document).ready(function(){  
+       setTimeout(function(){
+          alertmessage.remove();
+        },3000);
+   })
 
     </script>
 
