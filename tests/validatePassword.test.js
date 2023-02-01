@@ -26,5 +26,5 @@ test("returns true for password with numbers and uppercase letters ",()=>{
 
 
 test("returns true for password with numbers and uppercase and lowercase letters ",()=>{
-    expect(validatePassword("AnnaWJilliom1231")).toBe(true)
+    expect(validatePassword("Annawilliom1231")).toBe(true)
 })
