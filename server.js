@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-// const path = require("path");
-// const axios = require('axios');
+const path = require("path");
+const axios = require('axios');
 var cookieParser = require('cookie-parser');
 const message = require("./model/message_schema");
 
@@ -46,7 +46,6 @@ const roomRoute = require('./routes/room')
 const userRoute = require('./routes/user')
 const authRoute = require('./routes/auth');
 const employeeRoute = require('./routes/employee');
-const bookRoute = require('./routes/booking');
 
 // middleware 
 app.use(express.json())
@@ -56,7 +55,6 @@ app.use("/room", roomRoute);
 app.use("/user", userRoute);
 app.use("/auth", authRoute);
 app.use("/employee", employeeRoute);
-app.use("/booking", bookRoute);
 
 // static files 
 app.use(express.static('public'))
@@ -104,16 +102,10 @@ app.get('/adminHome', (req,res)=>{
   res.render('adminHome.ejs')
 })
 
-app.get('/adminBooking', (req,res)=>{
-  res.render('adminBookings.ejs', {message : req.flash('message')})
-})
-
 
 app.get('/displayrooms', (req,res)=>{
-  res.render('displayRooms.ejs', {message : req.flash('message')})
+  res.render('displayRooms.ejs')
 })
-
-
 
 app.get('/booking', (req,res)=>{
   res.render('booking.ejs')

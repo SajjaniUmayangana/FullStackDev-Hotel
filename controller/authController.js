@@ -174,15 +174,18 @@ exports.login = async (req, res) => {
    
   try {
     const user = await userdb.findOne({ username: req.body.username });
+
     // if no user is found
     if (!user) {
       return res.status(404).send("User not found, Please Register");
     }
+
     // Now compare the password with the password saved in the Database
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
       user.password
     );
+
     if (!isPasswordCorrect) {
       return res.status(400).send("Password or username is incorrect");
     } else {
@@ -192,12 +195,14 @@ exports.login = async (req, res) => {
         { id: user._id, isAdmin: user.isAdmin },
         process.env.jwtSecretKey
       );
+
       /*
     // To prevent sending the password
     const { password, isAdmin, ...otherDetails } = user._doc;
     res.cookie("access_token", newToken,{httpOnly: true})
     .status(200)
     .json({...otherDetails})
+
     }
   } catch (err) {
     res.status(500).json(err);
@@ -248,3 +253,5 @@ exports.login = async (req, res) => {
     console.log(err);
   }
 }
+
+
