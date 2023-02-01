@@ -101,3 +101,25 @@ exports.getRoomById = async (req, res) => {
         res.status(400).json(err);
       }
 }
+
+exports.bookRoom = (req, res) => {
+
+    const roomid = req.params.id
+
+    roomdb.findOneAndUpdate(
+          { roomid, availability: true },
+          { availability: false},
+
+        (err, room) => {
+          if (err) return res.status(500).send(err);
+
+          if (!room){
+            req.flash('message','Sorry, Room Already Booked!');
+            return res.status(404).redirect("/displayrooms");
+          } 
+          
+          // res.send("Room booked successfully");
+          res.redirect("/booking")
+        }
+      );
+    };

@@ -1,6 +1,8 @@
 const jsonwebtoken = require("jsonwebtoken");
 const errorCreated = require("./error");
 
+
+
 // verify the authentication
 exports.verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
@@ -22,11 +24,14 @@ exports.verifyToken = (req, res, next) => {
   });
 };
 
+
+
+
 // verify the user (the user of the admin can delelte the account)
 exports.verifyUser = (req, res, next) => {
 
    this.verifyToken(req,res, next, ()=> {
-    if (req.user.id == req.params.id || req.user.isAdmin){
+    if (req.user.id == req.params.id) {  // if (req.user.id == req.params.id || req.user.isAdmin)
         next()
     }else{
         return next(errorCreated.errorCreated(403,"You are not authorized"))

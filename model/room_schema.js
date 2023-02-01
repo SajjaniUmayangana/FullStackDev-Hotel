@@ -29,7 +29,17 @@ const roomSchema = new mongoose.Schema(
     },
     checkOut:{
       type: Date,
-    }
+    },
+    availability: { 
+      type: Boolean,
+       default: true
+     },
+     bookedBy: {
+      type: String, 
+        default: ""
+      }
+  
+     
     
     //img: []
     // currentbookings:[],
